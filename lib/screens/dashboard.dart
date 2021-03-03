@@ -17,10 +17,13 @@ class DashboardContainer extends StatelessWidget {
 class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final name = context.bloc<NameCubit>().state;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome $name'),
+        //misturando um BlocBuilder (que é um observer de eventos) com UI
+        title: BlocBuilder<NameCubit, String>(
+          builder: (context, state) => Text("Welcome $state"),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,36 +33,38 @@ class DashboardView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset("images/bytebank_logo.png"),
           ),
-          Container(
-            height: 120,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                _FeatureItem(
-                  'Transfer',
-                  Icons.monetization_on,
-                  onClick: () {
-                    print('transfer was clicked');
-                    _showContactsList(context);
-                  },
-                ),
-                _FeatureItem(
-                  'Transaction feed',
-                  Icons.description,
-                  onClick: () {
-                    print('Transsaction feed was clicked');
-                    _showTransactionsList(context);
-                  },
-                ),
-                _FeatureItem(
-                  'Change Name',
-                  Icons.person_outline,
-                  onClick: () {
-                    print('Transsaction feed was clicked');
-                    _showChangeName(context);
-                  },
-                ),
-              ],
+          SingleChildScrollView(
+            child: Container(
+              height: 120,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  _FeatureItem(
+                    'Transfer',
+                    Icons.monetization_on,
+                    onClick: () {
+                      print('transfer was clicked');
+                      _showContactsList(context);
+                    },
+                  ),
+                  _FeatureItem(
+                    'Transaction feed',
+                    Icons.description,
+                    onClick: () {
+                      print('Transsaction feed was clicked');
+                      _showTransactionsList(context);
+                    },
+                  ),
+                  _FeatureItem(
+                    'Change Name',
+                    Icons.person_outline,
+                    onClick: () {
+                      print('Transsaction feed was clicked');
+                      _showChangeName(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],
