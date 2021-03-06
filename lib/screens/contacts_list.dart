@@ -59,7 +59,8 @@ class _ContactsListState extends State<ContactsList> {
             MaterialPageRoute(
               builder: (context) => ContactForm(),
             ),
-          );
+          )
+          .then((value) => setState((){}));
         },
         child: Icon(Icons.add),
       ),
