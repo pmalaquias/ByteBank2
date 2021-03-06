@@ -7,7 +7,7 @@ class Transaction {
   Transaction(
     this.value,
     this.contact,
-  );
+  ): assert(value > 0);
 
   Transaction.fromJson(Map<String, dynamic> json)
       : value = json['value'],
